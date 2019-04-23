@@ -22,7 +22,8 @@ import Immutable from "immutable";
 import {ChainStore} from "bitsharesjs";
 import {List} from "immutable";
 import Icon from "../Icon/Icon";
-import {Checkbox, Modal, Button} from "bitshares-ui-style-guide";
+import {Checkbox, Modal, Button, Tooltip} from "bitshares-ui-style-guide";
+import asset_utils from "../../lib/common/asset_utils";
 
 /**
  *  Given an account and an asset id, render a modal allowing modification of a margin position for that asset
@@ -557,21 +558,13 @@ class BorrowModalContent extends React.Component {
         return (
             1 /
             utils.get_asset_price(
-                this.props.quote_asset.getIn([
-                    "bitasset",
-                    "current_feed",
-                    "settlement_price",
-                    "quote",
-                    "amount"
-                ]),
+                asset_utils
+                    .extractRawFeedPrice(this.props.quote_asset)
+                    .getIn(["quote", "amount"]),
                 this.props.backing_asset,
-                this.props.quote_asset.getIn([
-                    "bitasset",
-                    "current_feed",
-                    "settlement_price",
-                    "base",
-                    "amount"
-                ]),
+                asset_utils
+                    .extractRawFeedPrice(this.props.quote_asset)
+                    .getIn(["base", "amount"]),
                 this.props.quote_asset
             )
         );
@@ -675,15 +668,16 @@ class BorrowModalContent extends React.Component {
                         <Translate content="borrow.use_max" />
                     </a>
                 ) : (
-                    <span
-                        className="disabled-link"
-                        data-place="left"
-                        data-tip={counterpart.translate(
+                    <Tooltip
+                        placement="left"
+                        title={counterpart.translate(
                             "borrow.maximize_debt_set_ratio_slider"
                         )}
                     >
-                        <Translate content="borrow.use_max" />
-                    </span>
+                        <span className="disabled-link">
+                            <Translate content="borrow.use_max" />
+                        </span>
+                    </Tooltip>
                 )}
             </span>
         );
@@ -827,54 +821,34 @@ class BorrowModalContent extends React.Component {
                                             </span>
                                             <FormattedPrice
                                                 noPopOver
-                                                quote_amount={quote_asset.getIn(
-                                                    [
-                                                        "bitasset",
-                                                        "current_feed",
-                                                        "settlement_price",
+                                                quote_amount={asset_utils
+                                                    .extractRawFeedPrice(
+                                                        quote_asset
+                                                    )
+                                                    .getIn(["base", "amount"])}
+                                                quote_asset={asset_utils
+                                                    .extractRawFeedPrice(
+                                                        quote_asset
+                                                    )
+                                                    .getIn([
                                                         "base",
-                                                        "amount"
-                                                    ]
-                                                )}
-                                                quote_asset={quote_asset.getIn([
-                                                    "bitasset",
-                                                    "current_feed",
-                                                    "settlement_price",
-                                                    "base",
-                                                    "asset_id"
-                                                ])}
-                                                base_asset={quote_asset.getIn([
-                                                    "bitasset",
-                                                    "current_feed",
-                                                    "settlement_price",
-                                                    "quote",
-                                                    "asset_id"
-                                                ])}
-                                                base_amount={quote_asset.getIn([
-                                                    "bitasset",
-                                                    "current_feed",
-                                                    "settlement_price",
-                                                    "quote",
-                                                    "amount"
-                                                ])}
+                                                        "asset_id"
+                                                    ])}
+                                                base_asset={asset_utils
+                                                    .extractRawFeedPrice(
+                                                        quote_asset
+                                                    )
+                                                    .getIn([
+                                                        "quote",
+                                                        "asset_id"
+                                                    ])}
+                                                base_amount={asset_utils
+                                                    .extractRawFeedPrice(
+                                                        quote_asset
+                                                    )
+                                                    .getIn(["quote", "amount"])}
                                             />
                                         </div>
-                                        {/* <div className="borrow-price-feeds">
-                                <span
-                                    className="inline-block tooltip borrow-price-label"
-                                    data-place="bottom"
-                                    data-tip={counterpart.translate("tooltip.margin_price")}
-                                ><Translate content="exchange.squeeze" />:&nbsp;</span>
-                                <FormattedPrice
-                                    decimals={2}
-                                    callPrice
-                                    noPopOver
-                                    quote_amount={quote_asset.getIn(["bitasset", "current_feed", "settlement_price", "base", "amount"])}
-                                    quote_asset={quote_asset.getIn(["bitasset", "current_feed", "settlement_price", "base", "asset_id"])}
-                                    base_asset={quote_asset.getIn(["bitasset", "current_feed", "settlement_price", "quote", "asset_id"])}
-                                    base_amount={squeezeRatio * quote_asset.getIn(["bitasset", "current_feed", "settlement_price", "quote", "amount"])}
-                                    />
-                            </div> */}
                                         <b />
                                         <div
                                             className={
@@ -1052,18 +1026,19 @@ class BorrowModalContent extends React.Component {
                                                 <label>
                                                     <Translate content="borrow.target_collateral_ratio" />
                                                     &nbsp;&nbsp;
-                                                    <span
-                                                        data-place="top"
-                                                        data-html={true}
-                                                        data-tip={counterpart.translate(
+                                                    <Tooltip
+                                                        placement="top"
+                                                        title={counterpart.translate(
                                                             "tooltip.target_collateral_ratio"
                                                         )}
                                                     >
-                                                        <Icon
-                                                            name="question-circle"
-                                                            title="icons.question_circle"
-                                                        />
-                                                    </span>
+                                                        <span>
+                                                            <Icon
+                                                                name="question-circle"
+                                                                title="icons.question_circle"
+                                                            />
+                                                        </span>
+                                                    </Tooltip>
                                                 </label>
                                                 {useTargetCollateral ? (
                                                     <span>

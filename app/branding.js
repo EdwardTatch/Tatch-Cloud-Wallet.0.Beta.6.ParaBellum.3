@@ -79,7 +79,15 @@ export function getUnits(chainId = "4018d784") {
  */
 
 export function getMyMarketsBases() {
-    return ["TATCH.USD", "TATCH.EUR", "TATCH.NLG", "TATCH.BTC", "TCLGULDEN", "TATCHCOIN", "BTS"];
+    return [
+        "TATCH.USD",
+        "TATCH.EUR",
+        "TATCH.NLG",
+        "TATCH.BTC",
+        "TCLGULDEN",
+        "TATCHCOIN",
+        "BTS"
+    ];
 }
 
 /**
@@ -89,30 +97,16 @@ export function getMyMarketsBases() {
  */
 export function getMyMarketsQuotes() {
     let tokens = {
-        nativeTokens: [
-            "BTS",
-        ],
-	    
-        tatchTokens: [
-            "TATCHCOIN",
-            "TCLGULDEN",
-            "TCLSILVER"
-	],
-	    
-	tatchgateways: [
-	   "TATCH.EUR",
-	   "TATCH.USD",
-	   "TATCH.BTC",
-	   "TATCH.NLG",
-        ]
+        nativeTokens: ["BTS"],
+        tatchTokens: ["TATCHCOIN", "TCLGULDEN", "TCLSILVER"],
+        tatchgateways: ["TATCH.EUR", "TATCH.USD", "TATCH.BTC", "TATCH.NLG"]
     };
-	
-     let allTokens = [];
-     for (let type in tokens) {
-         allTokens = allTokens.concat(tokens[type]);
-     }
-     return allTokens;
- }
+    let allTokens = [];
+    for (let type in tokens) {
+        allTokens = allTokens.concat(tokens[type]);
+    }
+    return allTokens;
+}
 
 /**
  * The featured markets displayed on the landing page of the UI
@@ -121,33 +115,33 @@ export function getMyMarketsQuotes() {
  */
 export function getFeaturedMarkets(quotes = []) {
     return [
-	["BRIDGE.LTC","TATCH.NLG"],
-	["TATCH.BTC","TATCH.NLG"],
-	["TATCH.EUR","TATCH.NLG"],
-	["TATCHCOIN","TATCH.NLG"],
-	["TCLGULDEN","TATCH.NLG"],
-	["TCLSILVER","TATCH.NLG"],
-	["BRIDGE.WSP","TATCH.NLG"],
-	["BRIDGE.PIVX","TATCH.NLG"],
-	["TATCH.BTC","TATCH.EUR"],
-	["BRIDGE.WSP","TATCH.EUR"],
-	["BRIDGE.PIVX","TATCH.EUR"],
-	["BTS","TATCH.EUR"],
-	["BRIDGE.LTC","TATCH.EUR"],
-	["TATCH.NLG","TATCH.EUR"],
-	["TATCHCOIN","TATCH.EUR"],
-	["TCLGULDEN","TATCH.EUR"],
-	["TCLSILVER","TATCH.EUR"],
-	["TATCH.BTC","TATCH.BTC"],
-	["BRIDGE.WSP","TATCH.BTC"],
-	["BRIDGE.PIVX","TATCH.BTC"],
-	["BTS","TATCH.BTC"],
-	["BITEUR","TATCH.EUR"],
-	["BRIDGE.LTC","TATCH.BTC"],
-	["TATCH.NLG","TATCH.BTC"],
-	["TATCHCOIN","TATCH.BTC"],
-	["TCLGULDEN","TATCH.BTC"],
-	["TCLSILVER","TATCH.BTC"],
+        ["BRIDGE.LTC", "TATCH.NLG"],
+        ["TATCH.BTC", "TATCH.NLG"],
+        ["TATCH.EUR", "TATCH.NLG"],
+        ["TATCHCOIN", "TATCH.NLG"],
+        ["TCLGULDEN", "TATCH.NLG"],
+        ["TCLSILVER", "TATCH.NLG"],
+        ["BRIDGE.WSP", "TATCH.NLG"],
+        ["BRIDGE.PIVX", "TATCH.NLG"],
+        ["TATCH.BTC", "TATCH.EUR"],
+        ["BRIDGE.WSP", "TATCH.EUR"],
+        ["BRIDGE.PIVX", "TATCH.EUR"],
+        ["BTS", "TATCH.EUR"],
+        ["BRIDGE.LTC", "TATCH.EUR"],
+        ["TATCH.NLG", "TATCH.EUR"],
+        ["TATCHCOIN", "TATCH.EUR"],
+        ["TCLGULDEN", "TATCH.EUR"],
+        ["TCLSILVER", "TATCH.EUR"],
+        ["TATCH.BTC", "TATCH.BTC"],
+        ["BRIDGE.WSP", "TATCH.BTC"],
+        ["BRIDGE.PIVX", "TATCH.BTC"],
+        ["BTS", "TATCH.BTC"],
+        ["BITEUR", "TATCH.EUR"],
+        ["BRIDGE.LTC", "TATCH.BTC"],
+        ["TATCH.NLG", "TATCH.BTC"],
+        ["TATCHCOIN", "TATCH.BTC"],
+        ["TCLGULDEN", "TATCH.BTC"],
+        ["TCLSILVER", "TATCH.BTC"]
     ].filter(a => {
         if (!quotes.length) return true;
         return quotes.indexOf(a[0]) !== -1;
@@ -160,9 +154,7 @@ export function getFeaturedMarkets(quotes = []) {
  * @returns {[string,string,string,string,string,string,string]}
  */
 export function getAssetNamespaces() {
-    return [
-  "TATCH.", "BRIDGE.", "OPEN."
-    ];
+    return ["TATCH.", "BRIDGE.", "OPEN."];
 }
 
 /**
@@ -171,9 +163,7 @@ export function getAssetNamespaces() {
  */
 export function getAssetHideNamespaces() {
     // e..g "OPEN.", "bit"
-    return [
-	"TATCH.",
-    ];
+    return ["TATCH."];
 }
 
 /**
@@ -182,10 +172,7 @@ export function getAssetHideNamespaces() {
  * @returns {boolean}
  */
 export function allowedGateway(gateway) {
-    return (
-        ["TATCH", "BRIDGE", "OPEN", "tatch"]
-
-    );
+    return ["TATCH", "BRIDGE", "OPEN", "tatch"];
 }
 
 export function getSupportedLanguages() {

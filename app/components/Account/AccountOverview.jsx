@@ -79,6 +79,7 @@ class AccountOverview extends React.Component {
         return (
             !utils.are_equal_shallow(nextProps.balances, this.props.balances) ||
             nextProps.account !== this.props.account ||
+            nextProps.isMyAccount !== this.props.isMyAccount ||
             nextProps.settings !== this.props.settings ||
             nextProps.hiddenAssets !== this.props.hiddenAssets ||
             !utils.are_equal_shallow(nextState, this.state) ||
@@ -650,7 +651,12 @@ class AccountOverview extends React.Component {
                                             : 0
                                     )}
                                 >
-                                    <div>
+                                    <div
+                                        onClick={this._toggleHideProposal.bind(
+                                            this
+                                        )}
+                                        style={{cursor: "pointer"}}
+                                    >
                                         <Switch
                                             style={{margin: 16}}
                                             checked={
@@ -664,7 +670,7 @@ class AccountOverview extends React.Component {
                                     </div>
                                     <Proposals
                                         className="dashboard-table"
-                                        account={account.get("id")}
+                                        account={account}
                                         hideFishingProposals={
                                             this.state.hideFishingProposals
                                         }

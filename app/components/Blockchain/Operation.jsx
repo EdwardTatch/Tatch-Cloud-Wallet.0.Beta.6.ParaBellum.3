@@ -19,6 +19,8 @@ import marketUtils from "common/market_utils";
 import {connect} from "alt-react";
 import SettingsStore from "stores/SettingsStore";
 import PropTypes from "prop-types";
+import {Tooltip} from "bitshares-ui-style-guide";
+import asset_utils from "../../lib/common/asset_utils";
 
 const {operations} = grapheneChainTypes;
 require("./operations.scss");
@@ -111,24 +113,21 @@ class Row extends React.Component {
                         style={{textAlign: "left"}}
                         className="left-td column-hide-tiny"
                     >
-                        <Link
-                            className="inline-block"
-                            data-place="bottom"
-                            data-tip={counterpart.translate(
-                                "tooltip.show_block",
-                                {
-                                    block: utils.format_number(
-                                        this.props.block,
-                                        0
-                                    )
-                                }
-                            )}
-                            to={`/block/${this.props.block}/${
-                                this.props.txIndex
-                            }`}
+                        <Tooltip
+                            placement="bottom"
+                            title={counterpart.translate("tooltip.show_block", {
+                                block: utils.format_number(this.props.block, 0)
+                            })}
                         >
-                            <TransactionLabel color={color} type={type} />
-                        </Link>
+                            <Link
+                                className="inline-block"
+                                to={`/block/${this.props.block}/${
+                                    this.props.txIndex
+                                }`}
+                            >
+                                <TransactionLabel color={color} type={type} />
+                            </Link>
+                        </Tooltip>
                     </td>
                 )}
 
@@ -781,7 +780,9 @@ class Operation extends React.Component {
                                 },
                                 {
                                     type: "price",
-                                    value: op[1].feed.settlement_price,
+                                    value: asset_utils.extractRawFeedPrice(
+                                        op[1].feed
+                                    ),
                                     arg: "price"
                                 }
                             ]}

@@ -54,18 +54,6 @@ export const availableGateways = {
             selected: false
         }
     },
-    SPARKDEX: {
-        id: "SPARKDEX",
-        name: "SPARKDEX",
-        baseAPI: bitsparkAPIs,
-        isEnabled: allowedGateway("SPARKDEX"),
-        selected: false,
-        options: {
-            enabled: false,
-            selected: false
-        }
-    },
-    
     BRIDGE: {
         id: "BRIDGE",
         name: "CRYPTO-BRIDGE",

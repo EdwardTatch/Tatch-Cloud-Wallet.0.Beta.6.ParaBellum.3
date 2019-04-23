@@ -6,7 +6,6 @@ import utils from "common/utils";
 import Translate from "react-translate-component";
 import ChainTypes from "../Utility/ChainTypes";
 import BindToChainState from "../Utility/BindToChainState";
-import CitadelGateway from "../DepositWithdraw/citadel/CitadelGateway";
 import OpenledgerGateway from "../DepositWithdraw/OpenledgerGateway";
 import OpenLedgerFiatDepositWithdrawal from "../DepositWithdraw/openledger/OpenLedgerFiatDepositWithdrawal";
 import OpenLedgerFiatTransactionHistory from "../DepositWithdraw/openledger/OpenLedgerFiatTransactionHistory";
@@ -120,7 +119,7 @@ class AccountDepositWithdraw extends React.Component {
         });
     }
 
-     toggleTatchService(service) {
+    toggleTatchService(service) {
         this.setState({
             bitsparkService: service
         });
@@ -355,8 +354,7 @@ class AccountDepositWithdraw extends React.Component {
                         </ul>
                     </div>
 
-                    {tatchService === "gateway" &&
-                    tatchGatewayCoins.length ? (
+                    {tatchService === "gateway" && tatchGatewayCoins.length ? (
                         <TatchGateway
                             account={account}
                             coins={tatchGatewayCoins}
@@ -573,18 +571,6 @@ class AccountDepositWithdraw extends React.Component {
             )
         });
 
-        /***
-         * Winex Dsiabled due to WebFetch issues on failure
-         */
-        // serList.push({
-        //     name: "Winex",
-        //     template: (
-        //         <div>
-        //             <WinexGateway account={account} provider="Winex" />
-        //         </div>
-        //     )
-        // });
-
         return serList;
     }
 
@@ -621,7 +607,7 @@ class AccountDepositWithdraw extends React.Component {
                 if (a.symbol > b.symbol) return 1;
                 return 0;
             });
-        
+
         let bitsparkGatewayCoins = this.props.bitsparkBackedCoins
             .map(coin => {
                 return coin;
@@ -659,7 +645,6 @@ class AccountDepositWithdraw extends React.Component {
         });
 
         const serviceNames = [
-            "Winex",
             "GDEX",
             "OPEN",
             "RUDEX",
