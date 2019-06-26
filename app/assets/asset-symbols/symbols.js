@@ -7,7 +7,7 @@ require("file-loader?name=asset-symbols/[name].png!./eur.png");
 require("file-loader?name=asset-symbols/[name].png!./cny.png");
 require("file-loader?name=asset-symbols/[name].png!./gold.png");
 require("file-loader?name=asset-symbols/[name].png!./btc.png");
-require("file-loader?name=asset-symbols/silver.png!./silver.png");
+require("file-loader?name=asset-symbols/silver.png!./nlg.png");
 
 // 3rd party assets
 require("file-loader?name=asset-symbols/[name].png!./eth.png");
@@ -74,21 +74,20 @@ require("file-loader?name=asset-symbols/[name].png!./ltc.png");
 require("file-loader?name=asset-symbols/[name].png!./post.png");
 require("file-loader?name=asset-symbols/[name].png!./bch.png");
 require("file-loader?name=asset-symbols/[name].png!./btg.png");
-require("file-loader?name=asset-symbols/[name].png!./mdl.png");
-require("file-loader?name=asset-symbols/[name].png!./cof.png");
-require("file-loader?name=asset-symbols/[name].png!./exr.png");
-require("file-loader?name=asset-symbols/[name].png!./lcrt.png");
 
-// 3rd party assets (RuDEX)
-require("file-loader?name=asset-symbols/[name].png!./ppy.png");
-require("file-loader?name=asset-symbols/[name].png!./rudex.btc.png");
-require("file-loader?name=asset-symbols/[name].png!./rudex.eos.png");
-require("file-loader?name=asset-symbols/[name].png!./rudex.eth.png");
-require("file-loader?name=asset-symbols/[name].png!./rudex.gbg.png");
-require("file-loader?name=asset-symbols/[name].png!./rudex.golos.png");
-require("file-loader?name=asset-symbols/[name].png!./rudex.grc.png");
-require("file-loader?name=asset-symbols/[name].png!./rudex.krm.png");
-require("file-loader?name=asset-symbols/[name].png!./rudex.sbd.png");
-require("file-loader?name=asset-symbols/[name].png!./rudex.smoke.png");
-require("file-loader?name=asset-symbols/[name].png!./rudex.steem.png");
-require("file-loader?name=asset-symbols/[name].png!./rudex.wls.png");
+//Tatch
+require("file-loader?name=asset-symbols/[name].png!./tatchcoin.png");
+require("file-loader?name=asset-symbols/[name].png!./tclgulden.png");
+require("file-loader?name=asset-symbols/[name].png!./tclsilver.png");
+require("file-loader?name=asset-symbols/[name].png!./tatch.nlg.png");
+require("file-loader?name=asset-symbols/[name].png!./tatch.eur.png");
+require("file-loader?name=asset-symbols/[name].png!./tatch.usd.png");
+require("file-loader?name=asset-symbols/[name].png!./tatch.btc.png");
+
+//Addons
+require("file-loader?name=asset-symbols/[name].png!./bco.png");
+require("file-loader?name=asset-symbols/[name].png!./wsp.png");
+require("file-loader?name=asset-symbols/[name].png!./rpi.png");
+require("file-loader?name=asset-symbols/[name].png!./pivx.png");
+require("file-loader?name=asset-symbols/[name].png!./nlg.png");
+
