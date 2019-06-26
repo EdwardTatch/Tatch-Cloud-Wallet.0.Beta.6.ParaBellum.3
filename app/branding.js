@@ -1,8 +1,23 @@
+import {Apis} from "bitsharesjs-ws";
 /** This file centralized customization and branding efforts throughout the whole wallet and is meant to facilitate
  *  the process.
  *
  *  @author Stefan Schiessl <stefan.schiessl@blockchainprojectsbv.com>
  */
+
+/**
+ * Determine if we are running on testnet or mainnet
+ * @private
+ */
+function _isTestnet() {
+    const chainId = (Apis.instance().chain_id || "4018d784").substr(0, 8);
+    if (chainId === "4018d784") {
+        return false;
+    } else {
+        // treat every other chain as testnet, exact would be chainId === "39f5e2ed"
+        return true;
+    }
+}
 
 /**
  * Wallet name that is used throughout the UI and also in translations
@@ -64,6 +79,7 @@ export function getDefaultLogin() {
  *
  * @returns {[string,string,string,string,string,string]}
  */
+
 export function getUnits(chainId = "4018d784") {
     if (chainId === "4018d784")
         return ["TATCH.EUR", "TATCH.USD", "TATCH.BTC", "TATCH.NLG"];
@@ -97,6 +113,8 @@ export function getMyMarketsBases() {
  */
 export function getMyMarketsQuotes() {
     let tokens = {
+
+        bridgeTokens: ["BRIDGE.BCO", "BRIDGE.BTC", "BRIDGE.MONA", "BRIDGE.ZNY"],
         nativeTokens: ["BTS"],
         tatchTokens: ["TATCHCOIN", "TCLGULDEN", "TCLSILVER"],
         tatchgateways: ["TATCH.EUR", "TATCH.USD", "TATCH.BTC", "TATCH.NLG"]
@@ -115,6 +133,7 @@ export function getMyMarketsQuotes() {
  */
 export function getFeaturedMarkets(quotes = []) {
     return [
+
         ["BRIDGE.LTC", "TATCH.NLG"],
         ["TATCH.BTC", "TATCH.NLG"],
         ["TATCH.EUR", "TATCH.NLG"],
@@ -182,4 +201,19 @@ export function getSupportedLanguages() {
 export function getAllowedLogins() {
     // possible: list containing any combination of ["password", "wallet"]
     return ["password", "wallet"];
+}
+
+export function getConfigurationAsset() {
+    let assetSymbol = null;
+    if (_isTestnet()) {
+        assetSymbol = "NOTIFICATIONS";
+    } else {
+        assetSymbol = "TEST";
+    }
+    // explanation will be parsed out of the asset description (via split)
+    return {
+        symbol: assetSymbol,
+        explanation:
+            "This asset is used for decentralized configuration of the BitShares UI placed under bitshares.org."
+    };
 }
