@@ -113,8 +113,6 @@ export function getMyMarketsBases() {
  */
 export function getMyMarketsQuotes() {
     let tokens = {
-
-        bridgeTokens: ["BRIDGE.BCO", "BRIDGE.BTC", "BRIDGE.MONA", "BRIDGE.ZNY"],
         nativeTokens: ["BTS"],
         tatchTokens: ["TATCHCOIN", "TCLGULDEN", "TCLSILVER"],
         tatchgateways: ["TATCH.EUR", "TATCH.USD", "TATCH.BTC", "TATCH.NLG"]
