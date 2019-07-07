@@ -90,4 +90,5 @@ require("file-loader?name=asset-symbols/[name].png!./wsp.png");
 require("file-loader?name=asset-symbols/[name].png!./rpi.png");
 require("file-loader?name=asset-symbols/[name].png!./pivx.png");
 require("file-loader?name=asset-symbols/[name].png!./nlg.png");
+require("file-loader?name=asset-symbols/[name].png!./beos.png");
 
