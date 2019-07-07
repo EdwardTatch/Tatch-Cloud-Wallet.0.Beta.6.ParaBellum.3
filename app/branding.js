@@ -102,7 +102,8 @@ export function getMyMarketsBases() {
         "TATCH.BTC",
         "TCLGULDEN",
         "TATCHCOIN",
-        "BTS"
+        "BTS", 
+        "BEOS"
     ];
 }
 
@@ -132,7 +133,7 @@ export function getMyMarketsQuotes() {
 export function getFeaturedMarkets(quotes = []) {
     return [
 
-        ["BRIDGE.LTC", "TATCH.NLG"],
+        ["BEOS", "TATCH.NLG"],
         ["TATCH.BTC", "TATCH.NLG"],
         ["TATCH.EUR", "TATCH.NLG"],
         ["TATCHCOIN", "TATCH.NLG"],
