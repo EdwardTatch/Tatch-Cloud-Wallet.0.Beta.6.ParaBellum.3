@@ -16,7 +16,6 @@ import AccountStore from "stores/AccountStore";
 import SettingsStore from "stores/SettingsStore";
 import SettingsActions from "actions/SettingsActions";
 import {openledgerAPIs} from "api/apiConfig";
-import BitKapital from "../DepositWithdraw/BitKapital";
 import RuDexGateway from "../DepositWithdraw/rudex/RuDexGateway";
 import GatewayStore from "stores/GatewayStore";
 import AccountImage from "../Account/AccountImage";
@@ -199,11 +198,9 @@ class AccountDepositWithdraw extends React.Component {
         } = this.state;
         serList.push({
             name: "Openledger (OPEN.X)",
+            identifier: "OPEN",
             template: (
                 <div className="content-block">
-                    {/* <div className="float-right">
-                            <a href="https://www.ccedk.com/" target="__blank" rel="noopener noreferrer"><Translate content="gateway.website" /></a>
-                        </div> */}
                     <div
                         className="service-selector"
                         style={{marginBottom: "2rem"}}
@@ -275,6 +272,7 @@ class AccountDepositWithdraw extends React.Component {
 
         serList.push({
             name: "RuDEX (RUDEX.X)",
+            identifier: "RUDEX",
             template: (
                 <div className="content-block">
                     <div
@@ -367,6 +365,7 @@ class AccountDepositWithdraw extends React.Component {
 
         serList.push({
             name: "BitSpark (SPARKDEX.X)",
+            identifier: "SPARKDEX",
             template: (
                 <div className="content-block">
                     <div
@@ -406,6 +405,7 @@ class AccountDepositWithdraw extends React.Component {
 
         serList.push({
             name: "XBTS (XBTSX.X)",
+            identifier: "XBTSX",
             template: (
                 <div className="content-block">
                     <div
@@ -460,11 +460,10 @@ class AccountDepositWithdraw extends React.Component {
 
         serList.push({
             name: "BlockTrades",
+            identifier: "TRADE",
             template: (
                 <div>
                     <div className="content-block">
-                        {/* <div className="float-right"><a href="https://blocktrades.us" target="__blank" rel="noopener noreferrer"><Translate content="gateway.website" /></a></div> */}
-
                         <div
                             className="service-selector"
                             style={{marginBottom: "2rem"}}
@@ -501,6 +500,7 @@ class AccountDepositWithdraw extends React.Component {
                             initial_conversion_input_coin_type="bts"
                             initial_conversion_output_coin_type="bitbtc"
                             initial_conversion_estimated_input_amount="1000"
+                            params={this.props.location}
                         />
                     </div>
                     <div className="content-block" />
@@ -510,6 +510,7 @@ class AccountDepositWithdraw extends React.Component {
 
         serList.push({
             name: "Citadel",
+            identifier: "CITADEL",
             template: (
                 <div>
                     <div className="content-block">
@@ -553,17 +554,8 @@ class AccountDepositWithdraw extends React.Component {
         });
 
         serList.push({
-            name: "BitKapital",
-            template: (
-                <BitKapital
-                    viewSettings={this.props.viewSettings}
-                    account={account}
-                />
-            )
-        });
-
-        serList.push({
             name: "GDEX",
+            identifier: "GDEX",
             template: (
                 <div>
                     <GdexGateway account={account} provider={"gdex"} />
@@ -636,7 +628,9 @@ class AccountDepositWithdraw extends React.Component {
             xbtsxGatewayCoins
         );
 
+        const serviceNames = [];
         let options = services.map((services_obj, index) => {
+            serviceNames.push(services_obj.identifier);
             return (
                 <option key={index} value={index}>
                     {services_obj.name}
