@@ -10,13 +10,13 @@ import {Apis} from "bitsharesjs-ws";
  * @private
  */
 function _isTestnet() {
-    const chainId = (Apis.instance().chain_id || "4018d784").substr(0, 8);
-    if (chainId === "4018d784") {
-        return false;
-    } else {
-        // treat every other chain as testnet, exact would be chainId === "39f5e2ed"
-        return true;
-    }
+    const testnet =
+        "39f5e2ede1f8bc1a3a54a7914414e3779e33193f1f5693510e73cb7a87617447"; // just for the record
+    const mainnet =
+        "4018d7844c78f6a6c41c6a552b898022310fc5dec06da467ee7905a8dad512c8";
+
+    // treat every other chain as testnet
+    return Apis.instance().chain_id !== mainnet;
 }
 
 /**
@@ -43,6 +43,16 @@ export function getWalletURL() {
 export function getFaucet() {
     return {
         url: "https://faucet.bitshares.eu/3a2df26c1bc74473", // 2017-12-infrastructure worker proposal
+        show: true,
+        editable: false,
+        referrer: "onboarding.bitshares.foundation"
+    };
+}
+
+export function getTestFaucet() {
+    // fixme should be solved by introducing _isTestnet into getFaucet and fixing the mess in the Settings when fetching faucet address
+    return {
+        url: "https://faucet.testnet.bitshares.eu", // operated as a contribution by BitShares EU
         show: true,
         editable: false
     };
@@ -93,8 +103,8 @@ export function getUnits(chainId = "4018d784") {
  *
  * @returns {[string]}
  */
-
 export function getMyMarketsBases() {
+<<<<<<< HEAD
     return [
         "TATCH.USD",
         "TATCH.EUR",
@@ -105,6 +115,12 @@ export function getMyMarketsBases() {
         "BTS", 
         "BEOS"
     ];
+=======
+    if (_isTestnet()) {
+        return ["TEST"];
+    }
+    return ["BTS", "BTC", "ETH", "USD", "CNY"];
+>>>>>>> a200d3494b5f66bd360a054c6aa7330756bbc84f
 }
 
 /**
@@ -113,10 +129,135 @@ export function getMyMarketsBases() {
  * @returns {[string]}
  */
 export function getMyMarketsQuotes() {
+    if (_isTestnet()) {
+        return ["TEST"];
+    }
     let tokens = {
+<<<<<<< HEAD
         nativeTokens: ["BTS"],
         tatchTokens: ["TATCHCOIN", "TCLGULDEN", "TCLSILVER"],
         tatchgateways: ["TATCH.EUR", "TATCH.USD", "TATCH.BTC", "TATCH.NLG"]
+=======
+        nativeTokens: [
+            "BTC",
+            "BTS",
+            "CNY",
+            "EUR",
+            "GOLD",
+            "KRW",
+            "RUBLE",
+            "SILVER",
+            "USD"
+        ],
+        bridgeTokens: ["BRIDGE.BCO", "BRIDGE.BTC", "BRIDGE.MONA", "BRIDGE.ZNY"],
+        gdexTokens: [
+            "GDEX.BTC",
+            "GDEX.BTO",
+            "GDEX.EOS",
+            "GDEX.ETH",
+            "GDEX.BTM",
+            "GDEX.NEO",
+            "GDEX.GAS",
+            "GDEX.QTUM",
+            "GDEX.BKBT",
+            "GDEX.GXC",
+            "GDEX.HPB",
+            "GDEX.SEER",
+            "GDEX.FOTA",
+            "GDEX.JRC",
+            "GDEX.EOSDAC",
+            "GDEX.MTS",
+            "GDEX.GUSD",
+            "GDEX.IQ",
+            "GDEX.NULS",
+            "GDEX.USDT"
+        ],
+        openledgerTokens: [
+            "OBITS",
+            "OPEN.BTC",
+            "OPEN.DASH",
+            "OPEN.DGD",
+            "OPEN.DOGE",
+            "OPEN.EOS",
+            "OPEN.EOSDAC",
+            "OPEN.ETH",
+            "OPEN.EURT",
+            "OPEN.GRC",
+            "OPEN.INCNT",
+            "OPEN.KRM",
+            "OPEN.LISK",
+            "OPEN.LTC",
+            "OPEN.MAID",
+            "OPEN.MKR",
+            "OPEN.NEO",
+            "OPEN.OMG",
+            "OPEN.SBD",
+            "OPEN.STEEM",
+            "OPEN.TUSD",
+            "OPEN.USDT",
+            "OPEN.WAVES",
+            "OPEN.XMR",
+            "OPEN.ZEC",
+            "OPEN.ZRX"
+        ],
+        rudexTokens: [
+            "PPY",
+            "RUDEX.GBG",
+            "RUDEX.GOLOS",
+            "RUDEX.KRM",
+            "RUDEX.SBD",
+            "RUDEX.STEEM",
+            "RUDEX.BTC",
+            "RUDEX.ETH",
+            "RUDEX.EOS",
+            "RUDEX.WLS",
+            "RUDEX.SMOKE",
+            "RUDEX.GRC"
+        ],
+        sparkTokens: [
+            "ZEPH",
+            "PEG.PHP",
+            "SPARKDEX.ETH",
+            "SPARKDEX.BTC",
+            "SPARKDEX.HKD",
+            "SPARKDEX.SGD",
+            "SPARKDEX.AUD",
+            "SPARKDEX.EUR",
+            "SPARKDEX.GBP"
+        ],
+        xbtsxTokens: [
+            "XBTSX.STH",
+            "XBTSX.POST",
+            "XBTSX.DOGE",
+            "XBTSX.BTC",
+            "XBTSX.BTG",
+            "XBTSX.BCH",
+            "XBTSX.LTC",
+            "XBTSX.DASH",
+            "XBTSX.XSPEC",
+            "XBTSX.NVC",
+            "XBTSX.UNI",
+            "XBTSX.NMC",
+            "XBTSX.WAVES",
+            "XBTSX.COF",
+            "XBTSX.MDL",
+            "XBTSX.ETH",
+            "XBTSX.EXR"
+        ],
+        otherTokens: [
+            "BTWTY",
+            "TWENTIX",
+
+            "CVCOIN",
+            "HERO",
+            "OCT",
+            "HERTZ",
+            "ICOO",
+            "SMOKE",
+            "STEALTH",
+            "YOYOW"
+        ]
+>>>>>>> a200d3494b5f66bd360a054c6aa7330756bbc84f
     };
     let allTokens = [];
     for (let type in tokens) {
@@ -131,6 +272,9 @@ export function getMyMarketsQuotes() {
  * @returns {list of string tuples}
  */
 export function getFeaturedMarkets(quotes = []) {
+    if (_isTestnet()) {
+        return [["USD", "TEST"]];
+    }
     return [
 
         ["BEOS", "TATCH.NLG"],
@@ -172,7 +316,22 @@ export function getFeaturedMarkets(quotes = []) {
  * @returns {[string,string,string,string,string,string,string]}
  */
 export function getAssetNamespaces() {
+<<<<<<< HEAD
     return ["TATCH.", "BRIDGE.", "OPEN."];
+=======
+    if (_isTestnet()) {
+        return [];
+    }
+    return [
+        "OPEN.",
+        "RUDEX.",
+        "BRIDGE.",
+        "GDEX.",
+        "XBTSX.",
+        "SPARKDEX.",
+        "CITADEL."
+    ];
+>>>>>>> a200d3494b5f66bd360a054c6aa7330756bbc84f
 }
 
 /**
@@ -190,7 +349,25 @@ export function getAssetHideNamespaces() {
  * @returns {boolean}
  */
 export function allowedGateway(gateway) {
+<<<<<<< HEAD
     return ["TATCH", "BRIDGE", "OPEN", "tatch"];
+=======
+    const allowedGateways = [
+        "TRADE",
+        "OPEN",
+        "RUDEX",
+        "BRIDGE",
+        "GDEX",
+        "XBTSX",
+        "SPARKDEX",
+        "CITADEL"
+    ];
+    if (!gateway) {
+        // answers the question: are any allowed?
+        return allowedGateways.length > 0;
+    }
+    return allowedGateways.indexOf(gateway) >= 0;
+>>>>>>> a200d3494b5f66bd360a054c6aa7330756bbc84f
 }
 
 export function getSupportedLanguages() {
